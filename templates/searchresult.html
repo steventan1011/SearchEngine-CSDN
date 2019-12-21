@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+{% import "bootstrap/wtf.html" as wtf %}
+	<head>
+		<meta charset="utf-8" />
+		<link href="{{url_for('static',filename='style.css')}}" rel="stylesheet" type="text/css" media="all"/>
+	<!-- Custom Theme files -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+	<meta name="keywords" content="Flat Search Box Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+	<!--Google Fonts-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<!--Google Fonts-->
+		{% if title %}
+		<title>{(title)-IR4code}</title>
+		{% else %}
+		<title>IR4Code</title>
+		{% endif %}
+  <script type="text/javascript" src="{{url_for('static',filename='jquery.smart_autocomplete.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static',filename='jquery-1.8.3.min.js')}}"></script>
+  <script src="{{url_for('static',filename='jPages.js')}}"></script>
+  <link rel="stylesheet" href="{{url_for('static',filename='css/animate.min.css')}}">
+  <style type="text/css">
+   div#container {
+  	width: 730px;
+  	margin-left: 50px
+  }
+  body {
+  	background: #333;
+  	color: #ffffff;
+	font-family:microsoft yahei;
+  }
+  .title{ font-size: 20px;
+          color: white;}
+  .holder {
+    margin: 15px 0;
+	text-align:center;
+  }
+  .holder a {
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 5px;
+    color: #ffffff;
+	padding:2px 5px;
+  }
+  .holder a:hover {
+    background-color: #eee;
+    color: #ffffff;
+  }
+  .holder a.jp-previous { margin-right: 15px; }
+  .holder a.jp-next { margin-left: 15px; }
+  .holder a.jp-current, a.jp-current:hover {
+    color: #ffffff;
+    font-weight: bold;
+  }
+  .holder a.jp-disabled, a.jp-disabled:hover {
+    color: #eee;
+  }
+  .holder a.jp-current, a.jp-current:hover,
+  .holder a.jp-disabled, a.jp-disabled:hover {
+    cursor: default;
+    background: none;
+  }
+  .holder span { margin: 0 5px; }
+  div#content {
+  	width: 700px;
+  }
+  div#text{
+    font-size: 16px;
+  }
+  a#title{
+    font-size:20px;
+    color: #33B7FF;
+  }
+  div#sbar{
+	  width: 34%;
+	  margin: 50px;
+	  padding: 0.5em 0em 0.5em 0em;
+}
+  }
+  </style>  
+
+	  <script>
+	  $(function() {
+	    $("div.holder").jPages({
+	      containerID: "itemContainer",
+		  previous: "←左",
+	      next: "右→",
+	      perPage: 10
+	    });
+	  });
+	  </script>
+	  <script type="text/javascript">
+	$(function(){
+	queries = JSON.parse("{{url_for('static',filename='queries.json')}}")
+	$("#sbar").smartAutoComplete({maxResult:5,delay:1500,source:queries['data']})
+	});
+	</script>
+	</head>
+	<body>
+	<div id='sbar' class='s-bar'>
+		{{wtf.quick_form(form)}}
+	</div>
+	<div id="container" class="clearfix">
+    <!--! end of #sidebar -->
+    <div id="content" class="defaults">
+    	<!-- navigation holder -->
+      <!-- item container -->
+      <ul id="itemContainer">
+		{% block result %}
+		{% for i in result %}
+		<ul id='search-item'>
+			<a id='title' href= "{{ i.url }}" >{{i.blog_name}}</a>
+			<div id='text'>作者: {{i.author}} 		阅读次数:{{i.read_times}}</div>
+			<div id='text'>{{i.content[200:400]}}</div>
+			<div id='text'>{{i.uptime}}</div>
+      <br>
+
+		</ul>
+			{% endfor %}				
+		{% endblock %}
+    <!--! end of #content -->
+	</ul>
+    <!-- navigation holder -->
+    <div class="holder">
+    </div>
+    </div> 
+  </div>
+<div style="text-align:center;clear:both;">
+</div>
+		<p id=info>this is a website developed by tan, yang</p>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!--Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+{% extends "bootstrap/base.html" %}	
+{% import "bootstrap/wtf.html" as wtf %}
+<!-- Custom Theme files -->
+{% block head %}
+{%- block styles %}
+<!-- Bootstrap -->
+<link href= {{url_for('static',filename='css/style.css')}} rel="stylesheet" type="text/css" media="all"/>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+{%- endblock styles %}
+<!-- Custom Theme files -->
+{%- block metas %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="keywords" content="Flat Search Box Responsive, Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<!--Google Fonts-->
+{%- endblock metas %}
+<!--Google Fonts-->
+{% endblock %}
+{% block body %}
+<!--search start here-->
+<div class="search">
+	<i> </i>
+	<div class="s-bar",id='sbar'>
+	  {{wtf.quick_form(form)}}
+	</div>
+	<p>Popular searches: <a href={{url_for('result',query='java')}}>java,</a> <a href={{url_for('result',query='python')}}> python </a></p>
+</div>
+<!--search end here-->	
+
+{% block scripts %}
+	<script type="text/javascript" src="{{url_for('static',filename='jquery.smart_autocomplete.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='jquery-1.8.3.min.js')}}"></script>
+	<script type="text/javascript">
+		$(function(){
+		queries = JSON.parse("{{url_for('static',filename='queries.json')}}")
+		$(#sbar).smartAutoComplete({maxResult:5,delay:1500,source:queries['data'],typeAhead:true})
+		});
+	</script>
+{% endblock %}
+{% endblock %}
